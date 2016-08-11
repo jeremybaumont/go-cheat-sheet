@@ -10,6 +10,18 @@ cheatsheet do
             `http://godoc.org/github.com/<org>/<repo>`
             END
         end
+        entry do
+            name 'Local doc server'
+            notes <<-'END'
+            Run the server:
+
+            ```
+            godoc -http=:6060
+            ```
+
+            Browse to: http://localhost:6060/pkg
+            END
+        end
     end
 end
 
