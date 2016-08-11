@@ -1,4 +1,4 @@
-# Jest cheat sheet for Dash
+# Go cheat sheet for Dash
 
 This is a Go [cheat sheet][1] for [Dash][2].
 
