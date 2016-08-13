@@ -34,5 +34,32 @@ cheatsheet do
             END
         end
     end
+    category do
+        id 'Templates'
+        entry do
+            name 'Render a text template to a file'
+            notes <<-'END'
+            ```
+            import "text/template"
+            ...
+
+            f, err := os.Create("Makefile")
+            // check error
+            defer f.Close()
+
+            text := `
+            {{.Project}}.docset: {{.Project}}.rb
+                cheatset generate $<
+                open $@
+            `
+            tmpl, err := template.New("makefile").Parse(text)
+            // check error
+
+            err = tmpl.Execute(f, struct{ Project string }{"myproject"})
+            // check error
+            ```
+            END
+        end
+    end
 end
 
