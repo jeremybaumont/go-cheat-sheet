@@ -3,6 +3,13 @@ cheatsheet do
     docset_file_name 'Go'
     keyword 'goc'
     category do
+        id 'Basics'
+        entry do
+            name 'Length of slice'
+            command 'len(x)'
+        end
+    end
+    category do
         id 'godoc'
         entry do
             name 'Docs for github repo'
