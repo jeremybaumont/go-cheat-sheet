@@ -61,5 +61,20 @@ cheatsheet do
             END
         end
     end
+    category do
+        id 'Static checking'
+        entry do
+            name 'lint'
+            command 'golint'
+        end
+        entry do
+            name 'vet'
+            command 'go tool vet .'
+        end
+        entry do
+            name 'error check'
+            command 'errcheck'
+        end
+    end
 end
 
