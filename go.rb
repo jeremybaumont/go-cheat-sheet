@@ -24,6 +24,21 @@ cheatsheet do
         end
     end
     category do
+        id 'JSON'
+        entry do
+            name 'Decode a string'
+            notes <<-'END'
+            ```
+            import "encoding/json"
+
+            s := `["foo", "bar", "baz"]`
+            var vals []string
+            err := json.Unmarshal([]byte(s), &vals)
+            ```
+            END
+        end
+    end
+    category do
         id 'godoc'
         entry do
             name 'Docs for github repo'
