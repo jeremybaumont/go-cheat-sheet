@@ -10,6 +10,20 @@ cheatsheet do
         end
     end
     category do
+        id 'Testing'
+        entry do
+            name 'Call one test function'
+            notes <<-'END'
+            ```
+            go test github.com/org/project/package -run TestFunctionName
+            ```
+
+            Note: Even if the test is in `package_test` package, you still specify
+            it as `package`.
+            END
+        end
+    end
+    category do
         id 'godoc'
         entry do
             name 'Docs for github repo'
