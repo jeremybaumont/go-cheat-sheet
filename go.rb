@@ -24,6 +24,19 @@ cheatsheet do
         end
     end
     category do
+        id 'networking'
+        entry do
+            name 'Listen on a random availabile port'
+            notes <<-'END'
+            ```
+            l, err := net.Listen("tcp", ":0")
+            // check err
+            port := l.Addr().(*net.TCPAddr).Port
+            ```
+            END
+        end
+    end
+    category do
         id 'JSON'
         entry do
             name 'Decode a string'
