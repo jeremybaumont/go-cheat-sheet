@@ -3,10 +3,26 @@ cheatsheet do
     docset_file_name 'Go'
     keyword 'goc'
     category do
-        id 'Basics'
+        id 'Intrinsics'
         entry do
             name 'Length of slice'
             command 'len(x)'
+        end
+    end
+    category do
+        id 'File I/O'
+        entry do
+            name 'Write to a file in a temporary directory'
+            notes <<-'END'
+            ```
+            import os
+            ...
+            dir, err := ioutil.TempDir("", "chaosmonkey")
+            // check err
+            err := ioutil.WriteFile(dir + "/myfile.txt", []byte("contents"), 0755)
+            // check err
+            ```
+            END
         end
     end
     category do
