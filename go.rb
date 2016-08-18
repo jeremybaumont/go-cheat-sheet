@@ -14,6 +14,22 @@ cheatsheet do
         end
     end
     category do
+        id 'Type conversion'
+        entry do
+            name 'Convert from interface{} with checking'
+            notes <<-'END'
+            ```
+            var unknown interface{}
+            unknown = ...
+            s, valid := unknown.(string)
+            if(!valid) {
+              // Not a string!
+            }
+            ```
+            END
+        end
+    end
+    category do
         id 'File I/O'
         entry do
             name 'Write to a file in a temporary directory'
