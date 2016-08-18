@@ -28,6 +28,25 @@ cheatsheet do
             ```
             END
         end
+        entry do
+            name 'Type swtich'
+            notes <<-'END'
+            ```
+            var t interface{}
+            t = ...
+
+            // You don't have to reuse var name, but you can
+            switch t := t.(type) {
+            default:
+                return nil, errors.Errorf("unknown type %T", t)
+            case string:
+                // ...
+            case int:
+                // ...
+            }
+            ```
+            END
+        end
     end
     category do
         id 'File I/O'
