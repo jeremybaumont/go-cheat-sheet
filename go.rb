@@ -3,10 +3,14 @@ cheatsheet do
     docset_file_name 'Go'
     keyword 'goc'
     category do
-        id 'Intrinsics'
+        id 'Slices'
         entry do
             name 'Length of slice'
             command 'len(x)'
+        end
+        entry do
+            name 'Make an empty slice with capacity 10'
+            command 'make([]string, 0, 10)'
         end
     end
     category do
