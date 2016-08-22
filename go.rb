@@ -63,6 +63,18 @@ cheatsheet do
             ```
             END
         end
+        entry do
+            name 'Convert a string to an io.Reader'
+            notes <<-'END'
+            ```
+            import bytes
+
+            ...
+            s := "this is a string"
+            r := bytes.NewReader([]byte(s))
+            ```
+            END
+            end
     end
     category do
         id 'Testing'
