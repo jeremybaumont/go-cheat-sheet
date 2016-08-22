@@ -51,6 +51,18 @@ cheatsheet do
     category do
         id 'File I/O'
         entry do
+            name 'Read an entire file in one go'
+            notes <<-'END'
+            ```
+            import io/ioutil
+            ...
+            fname := ...
+            b, err := ioutil.ReadFile(fname)
+            ```
+            END
+
+        end
+        entry do
             name 'Write to a file in a temporary directory'
             notes <<-'END'
             ```
