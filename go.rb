@@ -217,5 +217,16 @@ cheatsheet do
             command 'errcheck'
         end
     end
+    category do
+        id 'Renaming'
+        entry do
+            name 'Rename a function'
+            notes <<-'END'
+            ```
+            gorename -from '"github.com/lorin/myproject/mypackage".OldName' -to NewName
+            ```
+            END
+        end
+    end
 end
 
