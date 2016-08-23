@@ -101,6 +101,19 @@ cheatsheet do
             it as `package`.
             END
         end
+        entry do
+            name "Suppress logging"
+            notes <<-'END'
+            ```
+            import (
+                "io/ioutil"
+                "log"
+            )
+                ...
+            log.SetOutput(ioutil.Discard)
+            ```
+            END
+        end
     end
     category do
         id 'networking'
