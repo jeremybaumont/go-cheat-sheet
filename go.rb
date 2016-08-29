@@ -174,6 +174,10 @@ cheatsheet do
             3. Now you can vendor it: `govendor add +external`
             END
         end
+        entry do
+            name 'Remove unused dependency'
+            command 'govendor remove +unused'
+        end
     end
     category do
         id 'Templates'
