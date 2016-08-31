@@ -142,6 +142,16 @@ cheatsheet do
             ```
             END
         end
+        entry do
+            name 'Current working directory'
+            notes <<-'END'
+            ```
+            import os
+
+            dir, err := os.Getwd()
+            ```
+            END
+        end
     end
     category do
         id 'JSON'
