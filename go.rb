@@ -129,6 +129,21 @@ cheatsheet do
         end
     end
     category do
+        id 'Processes'
+        entry do
+            name 'Run a process and capture the output'
+            notes <<-'END'
+            ```
+            import exec
+
+            cmd := exec.Command("myapp", "arg1", "arg2")
+            output, err := cmd.Output()
+            fmt.Sprintf("%s\n", string(output))
+            ```
+            END
+        end
+    end
+    category do
         id 'JSON'
         entry do
             name 'Decode a string'
