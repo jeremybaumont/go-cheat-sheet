@@ -1,7 +1,7 @@
 cheatsheet do
     title 'Go'
     docset_file_name 'Go'
-    keyword 'goc'
+    keyword 'go'
     category do
         id 'Slices'
         entry do
