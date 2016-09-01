@@ -22,7 +22,7 @@ cheatsheet do
         entry do
             name 'Convert from interface{} with checking'
             notes <<-'END'
-            ```
+            ```go
             var unknown interface{}
             unknown = ...
             s, valid := unknown.(string)
@@ -35,7 +35,7 @@ cheatsheet do
         entry do
             name 'Type swtich'
             notes <<-'END'
-            ```
+            ```go
             var t interface{}
             t = ...
 
@@ -108,7 +108,7 @@ cheatsheet do
         entry do
             name "Suppress logging"
             notes <<-'END'
-            ```
+            ```go
             import (
                 "io/ioutil"
                 "log"
@@ -124,10 +124,60 @@ cheatsheet do
         entry do
             name 'Listen on a random availabile port'
             notes <<-'END'
-            ```
+            ```go
             l, err := net.Listen("tcp", ":0")
             // check err
             port := l.Addr().(*net.TCPAddr).Port
+            ```
+            END
+        end
+        entry do
+            name 'Simple http server'
+            notes <<-'END'
+            ```go
+            func TestSomething(t *testing.T) {
+                l := serve(t, map[string]string{"/foo": "abc", "/bar": "def"})
+                defer l.Close()
+
+                url := fmt.Sprintf("http://localhost:%d", l.Addr().(*net.TCPAddr).Port)
+
+                // Make calls against theurl here
+
+            }
+
+            func serve(t *testing.T, responses map[string]string) net.Listener {
+                l, err := net.Listen("tcp", ":0")
+                if err != nil {
+                    t.Fatal(err)
+                }
+
+                go func() {
+                    sm := http.NewServeMux()
+
+                    defaultPresent := false
+
+                    for k, v := range responses {
+                        if k == "/" {
+                            defaultPresent = true
+                        }
+                        sm.HandleFunc(k, func(w http.ResponseWriter, r *http.Request) {
+                            w.Write([]byte(v))
+                        })
+                    }
+
+                    // default handler returns a 400 with an empty body
+                    if !defaultPresent {
+                        sm.HandleFunc("/", func(w http.ResponseWriter, r *http.Request) {
+                            w.WriteHeader(http.StatusBadRequest)
+                        })
+                    }
+
+                    http.Serve(l, sm)
+
+                }()
+
+                return l
+            }
             ```
             END
         end
@@ -321,7 +371,7 @@ cheatsheet do
         entry do
             name 'Rename a function'
             notes <<-'END'
-            ```
+            ```bash
             gorename -from '"github.com/lorin/myproject/mypackage".OldName' -to NewName
             ```
             END
