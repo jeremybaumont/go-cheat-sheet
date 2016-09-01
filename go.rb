@@ -218,6 +218,7 @@ cheatsheet do
             ```
             import "github.com/pkg/errors"
 
+            errors.Wrap(err, "failed to open file")
             errors.Wrapf(err, "failed to open %q", path)
             ```
             END
