@@ -133,6 +133,33 @@ cheatsheet do
         end
     end
     category do
+        id 'REST'
+        entry do
+            name 'GET'
+            notes <<-'END'
+            ```
+            import "net/http"
+
+            resp, err := http.Get("http://www.example.com")
+            ```
+            END
+        end
+        entry do
+            name 'HTTP Client'
+            notes <<-'END'
+            Sometimes you need a client which can be configured different ways.
+
+            Here's a trivial client, which you normally wouldn't use (e.g., you'd call http.Get instead)
+
+            ```
+            import "net/http"
+
+            client := new(http.Client)
+            ```
+            END
+        end
+    end
+    category do
         id 'Processes'
         entry do
             name 'Run a process and capture the output'
