@@ -194,6 +194,44 @@ cheatsheet do
         end
     end
     category do
+        id 'Error handling'
+        entry do
+            name 'Links'
+            notes <<-'END'
+            [Stack traces and the errors package](http://dave.cheney.net/2016/06/12/stack-traces-and-the-errors-package)
+            END
+        end
+        entry do
+            name 'New error'
+            notes <<-'END'
+            ```
+            import "github.com/pkg/errors"
+
+            errors.Errorf("not enough arguments, expected at least 3, got %d", len(args))
+            errors.New("Error message goes here")
+            ```
+            END
+        end
+        entry do
+            name 'Wrap an error from another package'
+            notes <<-'END'
+            ```
+            import "github.com/pkg/errors"
+
+            errors.Wrapf(err, "failed to open %q", path)
+            ```
+            END
+        end
+        entry do
+            name "Print stack trace"
+            notes <<-'END'
+            ```
+            fmt.Printf("%+v\n", err)
+            ```
+            END
+        end
+    end
+    category do
         id 'govendor'
         entry do
             name 'Add a new dependency'
