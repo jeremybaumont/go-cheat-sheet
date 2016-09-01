@@ -3,7 +3,7 @@ cheatsheet do
     docset_file_name 'Go'
     keyword 'go'
     category do
-        id 'Slices'
+        id 'Maps and slices'
         entry do
             name 'Length of slice'
             command 'len(x)'
@@ -11,6 +11,10 @@ cheatsheet do
         entry do
             name 'Make an empty slice with capacity 10'
             command 'make([]string, 0, 10)'
+        end
+        entry do
+            name "Iterate over map"
+            command 'for k, v := range mymap { ... }'
         end
     end
     category do
