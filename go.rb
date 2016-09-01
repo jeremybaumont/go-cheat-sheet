@@ -208,6 +208,48 @@ cheatsheet do
             ```
             END
         end
+        entry do
+            name 'Client-side TLS'
+            notes <<-'END'
+            ```go
+
+            import (
+                "crypto/tls"
+                "encoding/pem"
+                "io/ioutil"
+                "net/http"
+
+                "golang.org/x/crypto/pkcs12"
+            )
+
+            func main() {
+                certPath := "/path/to/cert.p12"
+                pfxData, err := ioutil.ReadFile(certPath)
+                // check err
+                client, err := getClient(pfxData, "password-for-p12-file")
+                ...
+            }
+
+            func getClient(pfxData []byte, password string) (*http.Client, error) {
+                blocks, err := pkcs12.ToPEM(pfxData, password)
+                // check err
+
+                // Assumes the first block is the cert and the last block is the private key
+                certPEMBlock := pem.EncodeToMemory(blocks[0])
+                keyPEMBlock := pem.EncodeToMemory(blocks[len(blocks)-1])
+
+                cert, err := tls.X509KeyPair(certPEMBlock, keyPEMBlock)
+                // check err
+
+                tlsConfig := &tls.Config{
+                    Certificates: []tls.Certificate{cert},
+                }
+                transport := &http.Transport{TLSClientConfig: tlsConfig}
+                return &http.Client{Transport: transport}, nil
+            }
+            ```
+            END
+        end
     end
     category do
         id 'Processes'
