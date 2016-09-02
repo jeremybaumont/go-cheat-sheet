@@ -120,6 +120,34 @@ cheatsheet do
         end
     end
     category do
+        id 'Function pointers'
+        entry do
+            name "Simple function pointer"
+            command "var f func(int) string"
+        end
+        entry do
+            name "Pointer to bound method"
+            notes <<-"END"
+            ```
+            rex := &Dog{}
+            var f func() string
+            f = rex.Speak
+            ```
+            END
+        end
+        entry do
+            name "Pointer to unbound method"
+            notes <<-"END"
+            For unbound methods, the first argument to the function is the method receiver type.
+
+            ```
+            var f func(Dog*) string
+            f = Dog.Speak
+            ```
+            END
+        end
+    end
+    category do
         id 'networking'
         entry do
             name 'Listen on a random availabile port'
