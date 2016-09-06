@@ -141,8 +141,18 @@ cheatsheet do
             For unbound methods, the first argument to the function is the method receiver type.
 
             ```
-            var f func(Dog*) string
-            f = Dog.Speak
+            var f func(*Dog) string
+            f = (*Dog).Speak
+            ```
+            END
+        end
+        entry do
+            name "Get name of method"
+            notes <<-"END"
+            ```
+            func nameOf(f interface{}) string {
+                return runtime.FuncForPC(reflect.ValueOf(f).Pointer()).Name()
+            }
             ```
             END
         end
