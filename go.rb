@@ -18,6 +18,25 @@ cheatsheet do
         end
     end
     category do
+        id 'Channels'
+        entry do
+            name 'Create an unbuffered channel'
+            command 'make(chan int)'
+        end
+        entry do
+            name 'Create a buffered channel'
+            command 'make(chan int, 5)'
+        end
+        entry do
+            name 'Read-only'
+            command 'var ch <-chan int'
+        end
+        entry do
+            name 'Write-only'
+            command 'var ch chan<- int'
+        end
+    end
+    category do
         id 'Type conversion'
         entry do
             name 'Convert from interface{} with checking'
