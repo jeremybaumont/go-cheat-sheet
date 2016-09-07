@@ -475,6 +475,35 @@ cheatsheet do
             ```
             END
         end
+        entry do
+            name 'Rename a method'
+            notes <<-'END'
+            ```bash
+            gorename -from '"github.com/lorin/myproject/mypackage".MyType.OldName' -to NewName
+            ```
+            END
+        end
+    end
+    category do
+        id 'Build tags'
+        entry do
+            name 'Add a custom build tag'
+            notes <<-'END'
+            ```go
+            // +build mytag
+
+            // Tag must be followed by a blankl ine!
+            ```
+            END
+        end
+        entry do
+            name 'Build with tag'
+            notes <<-'END'
+            ```bash
+            go build -o myapp-bin -tags mytag github.com/lorin/myapp
+            ```
+            END
+        end
     end
 end
 
