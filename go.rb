@@ -453,16 +453,46 @@ cheatsheet do
     category do
         id 'Static checking'
         entry do
+            name 'GOFLAGS in examples below'
+            notes <<-'END'
+            For example, build tags:
+
+            ```
+            GOFLAGS=-tags mytag
+            ```
+            END
+        end
+        entry do
             name 'lint'
-            command 'golint'
+            notes <<-'END'
+            ```
+            go list $(GOFLAGS) ./... | grep -v /vendor/ | xargs -L1 golint
+            ```
+            END
         end
         entry do
             name 'vet'
-            command 'go tool vet .'
+            notes <<-'END'
+            ```
+            go vet $(GOFLAGS) `go list $(GOFLAGS) ./... | grep -v /vendor/`
+            ```
+            END
         end
         entry do
-            name 'error check'
-            command 'errcheck'
+            name 'errcheck'
+            notes <<-'END'
+            ```
+            errcheck $(GOFLAGS) -ignoretests `go list $(GOFLAGS) ./... | grep -v /vendor/`
+            ```
+            END
+        end
+        entry do
+            name "Don't check return code when closing response body"
+            notes <<-'END'
+            ```
+            command "errcheck -ignore 'io:Close' ..."
+            ```
+            END
         end
     end
     category do
