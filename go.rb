@@ -193,16 +193,17 @@ cheatsheet do
             notes <<-'END'
             ```go
             func TestSomething(t *testing.T) {
-                l := serve(t, map[string]string{"/foo": "abc", "/bar": "def"})
+                ch := make(chan interface{}, 1)
+                l := serve(t, map[string]string{"/foo": "abc", "/bar": "def"}, ch)
                 defer l.Close()
 
                 url := fmt.Sprintf("http://localhost:%d", l.Addr().(*net.TCPAddr).Port)
 
-                // Make calls against theurl here
+                // Make calls against the url here
 
             }
 
-            func serve(t *testing.T, responses map[string]string) net.Listener {
+            func serve(t *testing.T, responses map[string]string, ch chan<- interface{}) net.Listener {
                 l, err := net.Listen("tcp", ":0")
                 if err != nil {
                     t.Fatal(err)
@@ -218,6 +219,8 @@ cheatsheet do
                             defaultPresent = true
                         }
                         sm.HandleFunc(k, func(w http.ResponseWriter, r *http.Request) {
+                            if r.Method != http.MethodPost { ... }
+
                             w.Write([]byte(v))
                         })
                     }
@@ -344,6 +347,33 @@ cheatsheet do
             s := `["foo", "bar", "baz"]`
             var vals []string
             err := json.Unmarshal([]byte(s), &vals)
+            ```
+            END
+        end
+        entry do
+            name 'Decode unknown json object http response'
+            notes <<-'END'
+            ```
+            import "encoding/json"
+
+            resp, err := http.Get("http://www.example.com")
+            // check err
+
+            defer resp.Body.Close()
+
+            dec := json.NewDecoder(resp.Body)
+
+            var f interface{}
+            err = dec.Decode(&f)
+            // check err
+
+            // Should be an object
+            m, ok := f.(map[string]interface{})
+            // check if !ok
+
+            // If we know that "foo" is a key and value is a string
+            val, ok := m["foo"].(string)
+
             ```
             END
         end
