@@ -28,12 +28,33 @@ cheatsheet do
             command 'make(chan int, 5)'
         end
         entry do
+            name 'Write'
+            command 'ch <- 3'
+        end
+        entry do
+            name 'Read'
+            command 'val := <-ch'
+        end
+        entry do
             name 'Read-only'
             command 'var ch <-chan int'
         end
         entry do
             name 'Write-only'
             command 'var ch chan<- int'
+        end
+        entry do
+            name 'Timeout'
+            notes <<-'END'
+            ```go
+            select {
+            case f = <-ch:
+                // nothing to do
+            case <-time.After(time.Second * 3):
+                t.Fatal("timeout waiting for channel")
+            }
+            ```
+            END
         end
     end
     category do
@@ -122,6 +143,14 @@ cheatsheet do
 
             Note: Even if the test is in `package_test` package, you still specify
             it as `package`.
+            END
+        end
+        entry do
+            name 'Always show logs in tests'
+            notes <<-'END'
+            ```
+            go test ... -v
+            ```
             END
         end
         entry do
