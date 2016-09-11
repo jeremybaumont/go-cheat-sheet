@@ -218,21 +218,28 @@ cheatsheet do
             END
         end
         entry do
-            name 'Simple http server'
+            name 'http server for testing'
             notes <<-'END'
             ```go
             func TestSomething(t *testing.T) {
-                ch := make(chan interface{}, 1)
-                l := serve(t, map[string]string{"/foo": "abc", "/bar": "def"}, ch)
+                l, url ch := serve(t, map[string]string{"/foo": "abc", "/bar": "def"})
                 defer l.Close()
 
-                url := fmt.Sprintf("http://localhost:%d", l.Addr().(*net.TCPAddr).Port)
 
                 // Make calls against the url here
+                ...
+                var f interface{}
+
+                select {
+                case f = <-ch:
+                    // nothing to do
+                case <-time.After(time.Second * 3):
+                    t.Fatal("timeout waiting for channel")
+                }
 
             }
 
-            func serve(t *testing.T, responses map[string]string, ch chan<- interface{}) net.Listener {
+            func serve(t *testing.T, responses map[string]string, ch chan<- interface{}) (net.Listener, string) {
                 l, err := net.Listen("tcp", ":0")
                 if err != nil {
                     t.Fatal(err)
@@ -248,7 +255,21 @@ cheatsheet do
                             defaultPresent = true
                         }
                         sm.HandleFunc(k, func(w http.ResponseWriter, r *http.Request) {
-                            if r.Method != http.MethodPost { ... }
+                            if r.Method != http.MethodPost {
+                                ch <- errors.New("expected POST")
+                                w.WriteHeader(http.StatusBadRequest)
+                                return
+                            }
+
+                            dec := json.NewDecoder(r.Body)
+                            var f interface{}
+                            err := dec.Decode(&f)
+                            if err != nil {
+                                ch <- err
+                                return
+                            }
+
+                            ch <- f
 
                             w.Write([]byte(v))
                         })
@@ -265,7 +286,7 @@ cheatsheet do
 
                 }()
 
-                return l
+                return l, fmt.Sprintf("http://localhost:%d", l.Addr().(*net.TCPAddr).Port)
             }
             ```
             END
