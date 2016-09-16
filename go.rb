@@ -576,12 +576,12 @@ cheatsheet do
         end
     end
     category do
-        id 'Renaming'
+        id 'Renaming & moving'
         entry do
             name 'Rename a function'
             notes <<-'END'
             ```bash
-            gorename -from '"github.com/lorin/myproject/mypackage".OldName' -to NewName
+            gorename -tags mytag -from '"github.com/lorin/myproject/mypackage".OldName' -to NewName
             ```
             END
         end
@@ -589,7 +589,15 @@ cheatsheet do
             name 'Rename a method'
             notes <<-'END'
             ```bash
-            gorename -from '"github.com/lorin/myproject/mypackage".MyType.OldName' -to NewName
+            gorename -tags mytag -from '"github.com/lorin/myproject/mypackage".MyType.OldName' -to NewName
+            ```
+            END
+        end
+        entry do
+            name 'Move a package'
+            notes <<-'END'
+            ```bash
+            gomove github.com/lorin/project/old github.com/lorin/project/new
             ```
             END
         end
@@ -611,6 +619,14 @@ cheatsheet do
             notes <<-'END'
             ```bash
             go build -o myapp-bin -tags mytag github.com/lorin/myapp
+            ```
+            END
+        end
+        entry do
+            name 'Multiple tags'
+            notes <<-'END'
+            ```bash
+            go build -o myapp-bin -tags 'mytag1 mytag2' github.com/lorin/myapp
             ```
             END
         end
