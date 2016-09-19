@@ -166,6 +166,18 @@ cheatsheet do
             ```
             END
         end
+        entry do
+            name 'TestMain'
+            notes <<-'END'
+            ```
+
+            func TestMain(m *testing.M) {
+                ...
+                os.Exit(m.Run())
+            }
+            ```
+            END
+        end
     end
     category do
         id 'Function pointers'
