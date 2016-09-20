@@ -178,6 +178,20 @@ cheatsheet do
             ```
             END
         end
+        entry do
+            name 'Table-driven tests'
+            notes <<-'END'
+            ```
+            tests := []struct{
+                i int
+                s string
+            }{
+                {1, "one"},
+                {2, "two"},
+            }
+            ```
+            END
+        end
     end
     category do
         id 'Function pointers'
