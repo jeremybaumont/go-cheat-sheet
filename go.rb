@@ -692,6 +692,39 @@ cheatsheet do
     category do
         id 'Database'
         entry do
+            name 'Transaction'
+            notes <<-'END'
+            ```go
+            import (
+                "database/sql"
+                _ "github.com/go-sql-driver/mysql"
+            )
+
+            func do() (err error) {
+
+                db, err := sql.Open("mysql", "user:passwd@tcp(127.0.0.1:3306)/mydb")
+                // check err
+
+                tx, err := db.Begin()
+                // check err
+
+                defer func() {
+                    switch err {
+                    case nil:
+                        err = tx.Commit()
+                    default:
+                        _ = tx.Rollback()
+                    }
+                }()
+
+                _, err = tx.Exec(...)
+                rows, err = tx.Query(...)
+            }
+
+            ```
+            END
+        end
+        entry do
             name 'Get error number (MySQL)'
             notes <<-'END'
             ```go
