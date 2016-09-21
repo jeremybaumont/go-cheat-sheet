@@ -58,6 +58,38 @@ cheatsheet do
         end
     end
     category do
+        id 'Errors'
+        entry do
+            name 'Semantic error values'
+            notes <<-'END'
+            ```
+            var ErrNotFound = errors.New("not found")
+
+            ...
+            err = myfunc()
+            if err == ErrNotFound {
+            ...
+            }
+            ```
+            END
+        end
+        entry do
+            name 'Handling in a defer'
+            notes <<-'END'
+            ```
+            func myfunc() (error err, ...) {
+
+                defer func() {
+                    if cerr := rows.Close(); cerr != nil && err == nil {
+                        err = errors.Wrap(err, "rows.Close() failed")
+                    }
+                }()
+
+            ```
+            END
+        end
+    end
+    category do
         id 'Type conversion'
         entry do
             name 'Convert from interface{} with checking'
