@@ -689,5 +689,31 @@ cheatsheet do
             END
         end
     end
+    category do
+        id 'Database'
+        entry do
+            name 'Get error number (MySQL)'
+            notes <<-'END'
+            ```go
+            var errno int
+
+            switch err := errors.Cause(err).(type) {
+            case *mysql.MySQLError:
+                errno = err.Number
+            default:
+                ...
+            }
+            ```
+
+            Above assumes using github.com/pkg/errors
+
+            Error message references:
+
+             * [MySQL site](https://dev.mysql.com/doc/refman/5.6/en/error-messages-server.html)
+             * [VividCortex/mysqlerror](https://github.com/VividCortex/mysqlerr/blob/master/mysqlerr.go)
+
+            END
+        end
+    end
 end
 
