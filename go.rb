@@ -557,8 +557,20 @@ cheatsheet do
             END
         end
         entry do
+            name 'Update dependency'
+            notes <<-'END'
+            ```bash
+            govendor update <package>
+            ```
+            END
+        end
+        entry do
             name 'Remove unused dependency'
-            command 'govendor remove +unused'
+            notes <<-'END'
+            ```bash
+            govendor remove +unused
+            ```
+            END
         end
     end
     category do
