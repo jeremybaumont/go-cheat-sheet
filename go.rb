@@ -9,6 +9,10 @@ cheatsheet do
             command 'len(x)'
         end
         entry do
+            name 'Append to slice'
+            command 'l = append(l, val)'
+        end
+        entry do
             name 'Make an empty slice with capacity 10'
             command 'make([]string, 0, 10)'
         end
