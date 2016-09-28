@@ -553,6 +553,16 @@ cheatsheet do
     category do
         id 'govendor'
         entry do
+            name 'Getting started'
+            notes <<-'END'
+            Create the initial vendor directory and json file:
+
+            ```bash
+            govendor init
+            ```
+            END
+        end
+        entry do
             name 'Add a new dependency'
             notes <<-'END'
             1. Install it locally: `go get github.com/<org>/<repo>`
