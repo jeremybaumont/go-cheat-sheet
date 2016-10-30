@@ -574,7 +574,15 @@ cheatsheet do
             name 'Update dependency'
             notes <<-'END'
             ```bash
-            govendor update <package>
+            govendor update github.com/team/project
+            ```
+            END
+        end
+        entry do
+            name 'Update all dependencies from GOPATH'
+            notes <<-'END'
+            ```bash
+            govendor update +vendor
             ```
             END
         end
