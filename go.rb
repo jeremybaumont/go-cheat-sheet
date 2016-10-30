@@ -426,6 +426,17 @@ cheatsheet do
     category do
         id 'Processes'
         entry do
+            name 'Run a process and block on completion'
+            notes <<-'END'
+            ```
+            import exec
+
+            cmd := exec.Command("myapp", "arg1", "arg2")
+            err := cmd.Run()
+            ```
+            END
+        end
+        entry do
             name 'Run a process and capture the output'
             notes <<-'END'
             ```
